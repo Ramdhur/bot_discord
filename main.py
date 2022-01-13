@@ -34,6 +34,16 @@ class MyClient(discord.Client):
                     )
                 await message.channel.send(embed=embed)
             
+            elif message.content.startswith('!essence'):
+                await message.delete()
+                if message.content[9:].isnumeric():
+                    embed=discord.Embed(
+                        title="Compta de Test",
+                        description = "Essence : " + message.content[9:] + "$",
+                        color=discord.Colour.orange()
+                        )
+                    await message.channel.send(embed=embed)
+            
             else:
                 await message.delete()
 
