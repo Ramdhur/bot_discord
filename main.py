@@ -1,6 +1,5 @@
 import discord
-
-
+import os
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -40,4 +39,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run('token')
+client.run(os.environ.get('TOKEN'))
