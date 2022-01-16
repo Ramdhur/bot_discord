@@ -80,7 +80,7 @@ class MyClient(discord.Client):
                 if message.content[8:].isnumeric():
                     embed=discord.Embed(
                         title="Système PBSC - Comptabilité - " + time.strftime('%H:%M', time.localtime()),
-                        description = "Export enregister par " + message.author.name + " pour une quantité de : " + message.content[8:] + " !",
+                        description = "Export enregister par " + message.author.display_name + " pour une quantité de : " + message.content[8:] + " !",
                         color=0x0BD33B
                         )
                     await message.channel.send(embed=embed)
