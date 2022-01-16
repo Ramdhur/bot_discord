@@ -21,7 +21,7 @@ class MyClient(discord.Client):
                     embed=discord.Embed(
                     title="Compta de Test",
                     description = "Radar : " + message.content[7:] + "$",
-                    color=discord.Colour.orange()
+                    color=0xF6AF00
                     )
                     await message.channel.send(embed=embed)
 
@@ -30,7 +30,7 @@ class MyClient(discord.Client):
                 embed=discord.Embed(
                     title="Compta de Test",
                     description = "Salaire : 80$",
-                    color=discord.Colour.dark_green()
+                    color=0x0BD33B
                     )
                 await message.channel.send(embed=embed)
             
