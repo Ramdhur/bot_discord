@@ -1,6 +1,6 @@
 import discord
 import os
-import time
+import datetime
 
 """
 Code couleur :
@@ -78,8 +78,9 @@ class MyClient(discord.Client):
             if message.content.startswith("!export"):
                 await message.delete()
                 if message.content[8:].isnumeric():
+                    date = datetime.datetime.now() + datetime.timedelta(hours=1, minutes=0)
                     embed=discord.Embed(
-                        title="Système PBSC - Comptabilité - " + time.strftime('%H:%M', time.localtime()),
+                        title="Système PBSC - Comptabilité - " + date.strftime("%Hh%M"),
                         description = "Export enregister par " + message.author.display_name + " pour une quantité de : " + message.content[8:] + " !",
                         color=0x0BD33B
                         )
