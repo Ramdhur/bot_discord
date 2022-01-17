@@ -1,7 +1,7 @@
 import discord
 import os
 import datetime
-#import psycopg2
+import psycopg2
 
 """
 Code couleur :
