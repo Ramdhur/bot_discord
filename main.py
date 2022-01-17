@@ -23,6 +23,14 @@ Code couleur :
 
 """
 
+HOST = "ec2-34-255-225-151.eu-west-1.compute.amazonaws.com"
+USER = "bwleptnszvvrct"
+PASSWORD = "68364d9f99e4bdad10d5c383526d1d271978ba11adbd2b783aaa1faa200221da"
+DATABASE = "dc4gsphlfb9d1n"
+
+conn = psycopg2.connect("host=%s dbname=%s user=%s password=%s" % (HOST, DATABASE, USER, PASSWORD))
+cur = conn.cursor()
+
 class MyClient(discord.Client):
     
     async def on_ready(self):
@@ -73,17 +81,8 @@ class MyClient(discord.Client):
             elif message.content.startswith('!ajouterProduit'):
                 await message.delete() 
                 
-                HOST = "ec2-34-255-225-151.eu-west-1.compute.amazonaws.com"
-                USER = "bwleptnszvvrct"
-                PASSWORD = "68364d9f99e4bdad10d5c383526d1d271978ba11adbd2b783aaa1faa200221da"
-                DATABASE = "dc4gsphlfb9d1n"
-
-                conn = psycopg2.connect("host=%s dbname=%s user=%s password=%s" % (HOST, DATABASE, USER, PASSWORD))
-                cur = conn.cursor()
-                cur.execute("INSERT INTO compta.produit VALUES ('Truffe',0.1,4,800,800);")
+                cur.execute("INSERT INTO compta.produit VALUES ('Marron',0.1,8,800,800,5);")
                 conn.commit()
-                cur.close()
-                conn.close()
                 
                 embed=discord.Embed(
                     title="Test de modif en base",
@@ -113,6 +112,10 @@ class MyClient(discord.Client):
             else:
                 await message.delete()
             
+   
         
 client = MyClient()
 client.run(os.environ.get('TOKEN'))
+
+cur.close()
+conn.close()
