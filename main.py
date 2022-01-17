@@ -69,6 +69,9 @@ class MyClient(discord.Client):
                         color=discord.Colour.orange()
                         )
                     await message.channel.send(embed=embed)
+                    
+            else:
+                await message.delete()
             """      
             elif message.content.startswith('!ajouterProduit'):
                 await message.delete()         
@@ -91,8 +94,7 @@ class MyClient(discord.Client):
                 
                 await message.channel.send(embed=embed)    
             """
-            else:
-                await message.delete()
+            
                 
         #--------------------------------------------#                  
         elif message.channel.name == "vente-tournée":
