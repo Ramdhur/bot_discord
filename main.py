@@ -72,7 +72,7 @@ class MyClient(discord.Client):
                         
             elif message.content.startswith('!ajouterProduit'):
                 await message.delete() 
-                """
+                
                 HOST = "ec2-34-255-225-151.eu-west-1.compute.amazonaws.com"
                 USER = "bwleptnszvvrct"
                 PASSWORD = "68364d9f99e4bdad10d5c383526d1d271978ba11adbd2b783aaa1faa200221da"
@@ -84,7 +84,7 @@ class MyClient(discord.Client):
                 conn.commit()
                 cur.close()
                 conn.close()
-                """
+                
                 embed=discord.Embed(
                     title="Test de modif en base",
                     description = "OK",
