@@ -50,34 +50,19 @@ class MyClient(discord.Client):
         if message.channel.name == "test-commandes":
             
             
-            if message.content.startswith("!removeTable"):
+            if message.content.startswith("!editTable"):
                 
-                cur.execute("DROP TABLE compta.resultat")
+                cur.execute("ALTER TABLE resultat ALTER COLUMN date TYPE TEXT")
                 conn.commit()
-                
-                await message.delete()                
+              
                 embed=discord.Embed(
-                    title="Destruction table resultat",
+                    title="Modification table resultat",
                     description = "",
                     color=0x000000
                 )
                 await message.channel.send(embed=embed)
-                               
-            elif message.content.startswith('!addTable'):
-                
-                cur.execute("CREATE TABLE resultat (employe TEXT NOT NULL, date DATE NOT NULL, planches INT NOT NULL, PRIMARY KEY (employe, date))")
-                conn.commit()
-                
-                await message.delete()                
-                embed=discord.Embed(
-                    title="Création table resultat",
-                    description = "",
-                    color=0x000000
-                )
-                await message.channel.send(embed=embed)
-               
-            else:
-                await message.delete()
+
+            await message.delete()
 
             
                 
