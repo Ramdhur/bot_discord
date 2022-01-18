@@ -49,21 +49,7 @@ class MyClient(discord.Client):
         #--------------------------------------------#    
         if message.channel.name == "test-commandes":
             
-            
-            if message.content.startswith("!editTable"):
-                
-                cur.execute("ALTER TABLE resultat ALTER COLUMN date TYPE TEXT")
-                conn.commit()
-              
-                embed=discord.Embed(
-                    title="Modification table resultat",
-                    description = "",
-                    color=0x000000
-                )
-                await message.channel.send(embed=embed)
-
             await message.delete()
-
             
                 
         #--------------------------------------------#                  
@@ -71,12 +57,23 @@ class MyClient(discord.Client):
             
             if message.content.startswith("!export"):                
                 if message.content[8:].isnumeric():
-                    date = datetime.datetime.now() + datetime.timedelta(hours=1, minutes=0)
+                    date = datetime.datetime.now() + datetime.timedelta(hours=1, minutes=0)                                      
                     embed=discord.Embed(
                         title="Système PBSC - Comptabilité - " + date.strftime("%Hh%M"),
                         description = "Export enregister par " + message.author.display_name + " pour une quantité de : " + message.content[8:] + " !",
                         color=0x0BD33B
-                        )
+                    )
+                    text_query = "SELECT * FROM resultat WHERE employe = '" + message.author.display_name + "' AND date = '" + date.strftime("%d/%m/%y") + "'"
+                    cur.execute(text_query)
+                    if len(cur.fetchall()) == 0:
+                        # enregistrement non-existant
+                        text_query = "INSERT INTO resultat VALUES ('" + message.author.display_name + "','" + date.strftime("%d/%m/%y") + "'," + message.content[8:] +")"
+                    else:
+                        # enregistrement existant
+                        text_query = "UPDATE resultat SET planches = planches + " + message.content[8:] + " WHERE employe = '" + message.author.display_name + "' AND date = '" + date.strftime("%d/%m/%y") + "'"
+
+                    cur.execute(text_query)
+                    conn.commit()
                     await message.channel.send(embed=embed)
                     
             await message.delete()
