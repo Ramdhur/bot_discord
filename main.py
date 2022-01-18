@@ -52,7 +52,7 @@ class MyClient(discord.Client):
             
             if message.content.startswith("!removeTableProduit"):
                 
-                cur.execute("DROP TABLE compta.produit")
+                cur.execute("DROP TABLE produit")
                 conn.commit()
                 
                 await message.delete()                
@@ -65,7 +65,7 @@ class MyClient(discord.Client):
                                
             elif message.content.startswith('!addTableProduit'):
                 
-                cur.execute("CREATE TABLE produit (nom TEXT PRIMARY KEY NOT NULL, stock_actuel INT, stock_voulu INT, prix_particulier INT, prix_entreprise INT)")
+                cur.execute("CREATE TABLE produit (employe TEXT PRIMARY KEY NOT NULL, stock_actuel INT NOT NULL, stock_voulu INT NOT NULL, prix_particulier INT NOT NULL, prix_entreprise INT NOT NULL)")
                 conn.commit()
                 
                 await message.delete()                
