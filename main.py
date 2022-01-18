@@ -76,20 +76,6 @@ class MyClient(discord.Client):
                 )
                 await message.channel.send(embed=embed)
                
-            """            
-            elif message.content.startswith('!ajouterProduit'):
-                await message.delete() 
-                
-                cur.execute("INSERT INTO compta.produit VALUES ('Marron',0.1,8,800,800,5);")
-                conn.commit()
-                
-                embed=discord.Embed(
-                    title="Test de modif en base",
-                    description = "OK",
-                    color=0x000000
-                )                
-                await message.channel.send(embed=embed)                            
-            """
             else:
                 await message.delete()
 
