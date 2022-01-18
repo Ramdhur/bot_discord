@@ -65,7 +65,7 @@ class MyClient(discord.Client):
                                
             elif message.content.startswith('!addTableProduit'):
                 
-                cur.execute("CREATE TABLE produit (employe TEXT PRIMARY KEY NOT NULL, stock_actuel INT NOT NULL, stock_voulu INT NOT NULL, prix_particulier INT NOT NULL, prix_entreprise INT NOT NULL)")
+                cur.execute("CREATE TABLE produit (nom TEXT PRIMARY KEY NOT NULL, stock_actuel INT NOT NULL, stock_voulu INT NOT NULL, prix_particulier INT NOT NULL, prix_entreprise INT NOT NULL)")
                 conn.commit()
                 
                 await message.delete()                
