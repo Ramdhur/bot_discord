@@ -49,35 +49,33 @@ class MyClient(discord.Client):
         #--------------------------------------------#    
         if message.channel.name == "test-commandes":
                 
-            if message.content.startswith("!radar"):
-                await message.delete()
-                if message.content[7:].isnumeric():
-                    embed=discord.Embed(
-                    title="Compta de Test",
-                    description = "Radar : " + message.content[7:] + "$",
-                    color=0xF67B00
-                    )
-                    await message.channel.send(embed=embed)
-
-            elif message.content.startswith('!salaire'):
-                await message.delete()
+            if message.content.startswith("!removeTableProduit"):
+                
+                cur.execute("DROP TABLE compta.produit")
+                conn.commit()
+                
+                await message.delete()                
                 embed=discord.Embed(
-                    title="Compta de Test",
-                    description = "Salaire : 80$",
-                    color=0x0BD33B
-                    )
+                    title="Destruction table produit",
+                    description = "",
+                    color=0x000000
+                )
                 await message.channel.send(embed=embed)
-            
-            elif message.content.startswith('!essence'):
-                await message.delete()
-                if message.content[9:].isnumeric():
-                    embed=discord.Embed(
-                        title="Compta de Test",
-                        description = "Essence : " + message.content[9:] + "$",
-                        color=discord.Colour.orange()
-                        )
-                    await message.channel.send(embed=embed)
-                        
+                               
+            elif message.content.startswith('!addTableProduit'):
+                
+                cur.execute("CREATE TABLE produit (nom TEXT PRIMARY KEY NOT NULL, stock_actuel INT, stock_voulu INT, prix_particulier INT, prix_entreprise INT)")
+                conn.commit()
+                
+                await message.delete()                
+                embed=discord.Embed(
+                    title="Création table produit",
+                    description = "",
+                    color=0x000000
+                )
+                await message.channel.send(embed=embed)
+                
+            """            
             elif message.content.startswith('!ajouterProduit'):
                 await message.delete() 
                 
@@ -90,7 +88,7 @@ class MyClient(discord.Client):
                     color=0x000000
                 )                
                 await message.channel.send(embed=embed)                            
-            
+            """
             else:
                 await message.delete()
 
@@ -112,7 +110,21 @@ class MyClient(discord.Client):
             else:
                 await message.delete()
             
-   
+        #--------------------------------------------#                  
+        """
+        elif message.channel.name == "stock":
+            
+            if message.content.startswith("!stock"):
+                await message.delete()
+                embed=discord.Embed(
+                    title="Système PBSC - Comptabilité - Stock",
+                    description = "",
+                    color=0x0BD33B
+                )
+                await message.channel.send(embed=embed)
+            else:
+                await message.delete()
+        """
         
 client = MyClient()
 client.run(os.environ.get('TOKEN'))
