@@ -84,8 +84,7 @@ class MyClient(discord.Client):
         #--------------------------------------------#                  
         elif message.channel.name == "vente-tournée":
             
-            if message.content.startswith("!export"):
-                await message.delete()
+            if message.content.startswith("!export"):                
                 if message.content[8:].isnumeric():
                     date = datetime.datetime.now() + datetime.timedelta(hours=1, minutes=0)
                     embed=discord.Embed(
@@ -94,8 +93,8 @@ class MyClient(discord.Client):
                         color=0x0BD33B
                         )
                     await message.channel.send(embed=embed)
-            else:
-                await message.delete()
+                    
+            await message.delete()
             
         #--------------------------------------------#                  
         """
