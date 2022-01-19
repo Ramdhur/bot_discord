@@ -71,11 +71,24 @@ class MyClient(discord.Client):
         elif message.channel.name == "stock":
             
             if message.content.startswith("!stock"):
+                
+                cur.execute("SELECT nom, stock_actuel, stock_voulu FROM produit ORDER BY nom")
+                selectedLignes = cur.fetchall()
+                messageG = ""
+                messageD = ""
+                for raw in selectedLignes:
+                    messageG += raw[0]
+                    messageG += raw[1] + " / " + raw[2]
+                
+                
                 embed=discord.Embed(
                     title="Système PBSC - Comptabilité - Stock",
                     description = "",
                     color=0x0BD33B
                 )
+                embed.add_field("Nom", messageG, True)
+                embed.add_field("Quantité", messageD, True)
+                
                 await message.channel.send(embed=embed)
             
             elif message.content.startswith("!addProduit"):
