@@ -77,7 +77,7 @@ class MyClient(discord.Client):
                     color=0x0BD33B
                 )
                 await message.channel.send(embed=embed)
-            
+            """
             elif message.content.startswith("!addProduit"):
                 contenu = message.content[12:].split(", ")
                 if len(contenu) == 5:
@@ -99,7 +99,7 @@ class MyClient(discord.Client):
                             color=0x000000
                         )
                         await message.channel.send(embed=embed)
-                    
+            """        
             await message.delete()
         
         
