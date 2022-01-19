@@ -98,11 +98,24 @@ class MyClient(discord.Client):
                         
                         embed=discord.Embed(
                             title="Ajout produit",
-                            description = "",
+                            description = contenu[0],
                             color=0x000000
                         )
                         await message.channel.send(embed=embed)
+                        
+            elif message.content.startswith("!removeProduit"):
+                cur.execute("SELECT * FROM produit WHERE nom = '" + message.content[15:] + "'")
+                if len(cur.fetchall()) != 0:
+                    cur.execute("DELETE FROM produit WHERE nom = '" + message.content[15:] + "'")
+                    conn.commit()
                     
+                    embed=discord.Embed(
+                            title="Supression produit",
+                            description = message.content[15:],
+                            color=0x000000
+                    )
+                    await message.channel.send(embed=embed)
+                
             await message.delete()
         
         
