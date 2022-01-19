@@ -73,13 +73,13 @@ class MyClient(discord.Client):
             if message.content.startswith("!stock"):                
                 cur.execute("SELECT nom, stock_actuel, stock_voulu FROM produit ORDER BY nom")
                 selectedLignes = cur.fetchall()
-                messageG = "Test"
-                messageD = "Concluant"
-                """
+                messageG = ""
+                messageD = ""
+                
                 for raw in selectedLignes:
-                    messageG += raw[0]
-                    messageG += raw[1] + " / " + raw[2]
-                """
+                    messageG += ":green_circle: - " + raw[0]
+                    messageD += raw[1] + " / " + raw[2]
+                
                 
                 embed=discord.Embed(
                     title="Système PBSC - Comptabilité - Stock",
