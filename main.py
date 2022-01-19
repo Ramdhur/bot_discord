@@ -78,7 +78,7 @@ class MyClient(discord.Client):
                 
                 for raw in selectedLignes:
                     messageG += ":green_circle: - " + raw[0]
-                    messageD += raw[1] + " / " + raw[2]
+                    messageD += str(raw[1]) + " / " + str(raw[2])
                 
                 
                 embed=discord.Embed(
