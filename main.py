@@ -86,8 +86,8 @@ class MyClient(discord.Client):
                     description = "",
                     color=0x0BD33B
                 )
-                embed.add_field("Nom", messageG, True)
-                embed.add_field("Quantité", messageD, True)
+                embed.add_field(name = "Nom", value = messageG, inline = True)
+                embed.add_field(name = "Quantité", value = messageD, inline = True)
                 
                 await message.channel.send(embed=embed)
             
