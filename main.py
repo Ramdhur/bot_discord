@@ -85,7 +85,7 @@ class MyClient(discord.Client):
                     cur.execute("SELECT * FROM produit WHERE nom = '" + contenu[0] + "'")
                     
                     if len(cur.fetchall()) == 0: 
-                        """
+                        
                         text_query = "INSERT INTO produit VALUES ('"
                         text_query += contenu[0] + "',"
                         text_query += contenu[1] + ","
@@ -95,9 +95,9 @@ class MyClient(discord.Client):
                         cur.execute(text_query)
                         conn.commit()
                         text_query = ""
-                        """
+                        
                         embed=discord.Embed(
-                            title="Ajout produit"),
+                            title="Ajout produit",
                             description = "",
                             color=0x000000
                         )
