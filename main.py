@@ -70,16 +70,16 @@ class MyClient(discord.Client):
         
         elif message.channel.name == "stock":
             
-            if message.content.startswith("!stock"):
-                
+            if message.content.startswith("!stock"):                
                 cur.execute("SELECT nom, stock_actuel, stock_voulu FROM produit ORDER BY nom")
                 selectedLignes = cur.fetchall()
-                messageG = ""
-                messageD = ""
+                messageG = "Test"
+                messageD = "Concluant"
+                """
                 for raw in selectedLignes:
                     messageG += raw[0]
                     messageG += raw[1] + " / " + raw[2]
-                
+                """
                 
                 embed=discord.Embed(
                     title="Système PBSC - Comptabilité - Stock",
@@ -90,6 +90,7 @@ class MyClient(discord.Client):
                 embed.add_field("Quantité", messageD, True)
                 
                 await message.channel.send(embed=embed)
+            
             
             elif message.content.startswith("!addProduit"):
                 contenu = message.content[12:].split(", ")
@@ -115,6 +116,7 @@ class MyClient(discord.Client):
                             color=0x000000
                         )
                         await message.channel.send(embed=embed)
+                        
                         
             elif message.content.startswith("!removeProduit"):
                 cur.execute("SELECT * FROM produit WHERE nom = '" + message.content[15:] + "'")
