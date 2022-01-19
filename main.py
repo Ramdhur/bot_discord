@@ -8,19 +8,6 @@ Code couleur :
     - vert : 0x0BD33B
     - orange : 0xF67B00
     - rouge : 0xF40000
-
-        elif message.channel.name == "":
-            
-            if message.content.startswith("!"):
-                await message.delete()
-                embed=discord.Embed(
-                    title="",
-                    description = "",
-                    color=0x000000
-                    )
-            else:
-                await message.delete()
-
 """
 
 HOST = "ec2-34-255-225-151.eu-west-1.compute.amazonaws.com"
@@ -72,27 +59,49 @@ class MyClient(discord.Client):
                         # enregistrement existant
                         text_query = "UPDATE resultat SET planches = planches + " + message.content[8:] + " WHERE employe = '" + message.author.display_name + "' AND date = '" + date.strftime("%d/%m/%y") + "'"
 
-                    cur.execute(text_query)
+                    cur.execute(text_query)                    
                     conn.commit()
+                    text_query = ""
                     await message.channel.send(embed=embed)
                     
             await message.delete()
             
         #--------------------------------------------#                  
-        """
+        
         elif message.channel.name == "stock":
             
             if message.content.startswith("!stock"):
-                await message.delete()
                 embed=discord.Embed(
                     title="Système PBSC - Comptabilité - Stock",
                     description = "",
                     color=0x0BD33B
                 )
                 await message.channel.send(embed=embed)
-            else:
-                await message.delete()
-        """
+            
+            elif message.content.startswith("!addProduit"):
+                contenu = message.content[12:].split(", ")
+                if len(contenu) == 5:
+                    cur.execute("SELECT * FROM produit WHERE nom = '" + contenu[0] + "'")
+                    if len(cur.fetchall()) == 0: 
+                        text_query = "INSERT INTO produit VALUES ('"
+                        text_query += contenu[0] + "',"
+                        text_query += contenu[1] + ","
+                        text_query += contenu[2] + ","
+                        text_query += contenu[3] + ","
+                        text_query += contenu[4] + ")"
+                        cur.execute(text_query)
+                        conn.commit()
+                        text_query = ""
+                    
+                        embed=discord.Embed(
+                            title="Ajout produit"),
+                            description = contenu[0],
+                            color=0x000000
+                        )
+                        await message.channel.send(embed=embed)
+                    
+            await message.delete()
+        
         
 client = MyClient()
 client.run(os.environ.get('TOKEN'))
