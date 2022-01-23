@@ -36,6 +36,16 @@ class MyClient(discord.Client):
         #--------------------------------------------#    
         if message.channel.name == "test-commandes":
             
+            if message.content.startswith("!addTable"):   
+                cur.execute("CREATE TABLE save (id_msg INT NOT NULL, chan_msg TEXT NOT NULL, descr_msg TEXT NOT NULL)")
+                conn.commit()
+                embed=discord.Embed(
+                                title="Ajout Table",
+                                description = "save",
+                                color=0x000000
+                        )
+                await message.channel.send(embed=embed)
+            
             await message.delete()
             
                 
