@@ -147,16 +147,6 @@ class MyClient(discord.Client):
                 
             await message.delete()
         
-"""        
-def addIDmsg(pId_msg, pChannel_msg, pDescr_msg):    
-    text_query = "INSERT INTO save VALUES ("
-    text_query += str(pId_msg) + ",'"
-    text_query += pChannel_msg + "',"
-    text_query += pDescr_msg + "')"
-    cur.execute("")
-    conn.commit()
-    text_query = ""
-""" 
         
 client = MyClient()
 client.run(os.environ.get('TOKEN'))
