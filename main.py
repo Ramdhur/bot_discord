@@ -108,10 +108,12 @@ class MyClient(discord.Client):
                 embed.add_field(name = "Nom", value = messageG, inline = True)
                 embed.add_field(name = "Quantité", value = messageD, inline = True)
                                 
-                #ESA01 await message.channel.send(embed=embed)
+                await message.channel.send(embed=embed)
                 #ESA01...
+                """
                 msg = await message.channel.send(embed=embed)
                 addIDmsg(msg.id, message.channel, "stock")
+                """
                 #...ESA01
             
             
@@ -158,6 +160,7 @@ class MyClient(discord.Client):
         
         
 # ESA01...
+"""
 def addIDmsg(pId_msg, pChannel_msg, pDescr_msg):    
     text_query = "INSERT INTO save VALUES ("
     text_query += str(pId_msg) + ",'"
@@ -166,6 +169,7 @@ def addIDmsg(pId_msg, pChannel_msg, pDescr_msg):
     cur.execute("")
     conn.commit()
     text_query = ""
+"""
 #...ESA01        
 
         
