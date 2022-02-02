@@ -1,14 +1,19 @@
+"""
+Traces :
+ESA01   31/01/22    Ajout sauvegarde message id
+
+-----
+Code couleur :
+    - vert : 0x0BD33B
+    - orange : 0xF67B00
+    - rouge : 0xF40000
+"""    
+
 import discord
 import os
 import datetime
 import psycopg2
 
-"""
-Code couleur :
-    - vert : 0x0BD33B
-    - orange : 0xF67B00
-    - rouge : 0xF40000
-"""
 
 HOST = "ec2-52-49-56-163.eu-west-1.compute.amazonaws.com"
 USER = "ofcugccjnydpcc"
@@ -102,8 +107,12 @@ class MyClient(discord.Client):
                 )
                 embed.add_field(name = "Nom", value = messageG, inline = True)
                 embed.add_field(name = "Quantité", value = messageD, inline = True)
-                
-                await message.channel.send(embed=embed)
+                                
+                #ESA01 await message.channel.send(embed=embed)
+                #ESA01...
+                msg = await message.channel.send(embed=embed)
+                addIDmsg(msg.id, message.channel, "stock")
+                #...ESA01
             
             
             elif message.content.startswith("!addProduit"):
@@ -147,6 +156,18 @@ class MyClient(discord.Client):
                 
             await message.delete()
         
+        
+# ESA01...
+def addIDmsg(pId_msg, pChannel_msg, pDescr_msg):    
+    text_query = "INSERT INTO save VALUES ("
+    text_query += str(pId_msg) + ",'"
+    text_query += pChannel_msg + "',"
+    text_query += pDescr_msg + "')"
+    cur.execute("")
+    conn.commit()
+    text_query = ""
+#...ESA01        
+
         
 client = MyClient()
 client.run(os.environ.get('TOKEN'))
